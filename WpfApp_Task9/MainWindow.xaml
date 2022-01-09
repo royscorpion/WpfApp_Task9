@@ -1,0 +1,123 @@
+﻿<Window x:Class="WpfApp_Task9.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp_Task9"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Style="{DynamicResource WindowStyle}">
+    <Window.CommandBindings>
+        <CommandBinding Command="New" Executed="NewExecuted"/>
+        <CommandBinding Command="Open" Executed="OpenExecuted"/>
+        <CommandBinding Command="Save" Executed="SaveExecuted"/>
+        <CommandBinding Command="local:Task7_Command.Exit" Executed="ExitExecuted"/>
+    </Window.CommandBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" Margin="5" Padding="5" Style="{DynamicResource MenuStyle}">
+            <MenuItem Header="_Файл" Style="{DynamicResource MenuStyle}" BorderThickness="0">
+                <MenuItem Header="Созд_ать" Command="New" Style="{DynamicResource MenuStyle}">
+                    <MenuItem.Icon>
+                        <Image Source="Data/new.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Открыть" Command="Open" Style="{DynamicResource MenuStyle}">
+                    <MenuItem.Icon>
+                        <Image Source="Data/open_folder.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Сохранить" Command="Save" Style="{DynamicResource MenuStyle}">
+                    <MenuItem.Icon>
+                        <Image Source="Data/save_disc.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator Style="{DynamicResource MenuStyle}"/>
+                <MenuItem Header="_Выход" Command="local:Task7_Command.Exit" Style="{DynamicResource MenuStyle}">
+                    <MenuItem.Icon>
+                        <Image Source="Data/quit.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Правка" Style="{DynamicResource MenuStyle}">
+                <MenuItem Header="_Отменить" Command="Undo" CommandTarget="{Binding ElementName=textBox}" Style="{DynamicResource MenuStyle}">
+                    <MenuItem.Icon>
+                        <Image Source="Data/undo.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Верну_ть" Command="Redo" CommandTarget="{Binding ElementName=textBox}" Style="{DynamicResource MenuStyle}">
+                    <MenuItem.Icon>
+                        <Image Source="Data/redo.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Вы_резать" Command="Cut" CommandTarget="{Binding ElementName=textBox}" Style="{DynamicResource MenuStyle}">
+                    <MenuItem.Icon>
+                        <Image Source="Data/cut.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Копировать" Command="Copy" CommandTarget="{Binding ElementName=textBox}" Style="{DynamicResource MenuStyle}">
+                    <MenuItem.Icon>
+                        <Image Source="Data/copy.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="В_ставить" Command="Paste" CommandTarget="{Binding ElementName=textBox}" Style="{DynamicResource MenuStyle}">
+                    <MenuItem.Icon>
+                        <Image Source="Data/paste.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Вид" Style="{DynamicResource MenuStyle}">
+                <MenuItem Header="_Тема" Style="{DynamicResource MenuStyle}">
+                    <MenuItem Header="Светлая" Style="{DynamicResource MenuStyle}"/>
+                    <MenuItem Header="Темная" Style="{DynamicResource MenuStyle}"/>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Справ_ка" Style="{DynamicResource MenuStyle}">
+                <MenuItem Header="_Просмотр справки" Command="Help" Style="{DynamicResource MenuStyle}">
+                    <MenuItem.Icon>
+                        <Image Source="Data/help.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_О программе" Style="{DynamicResource MenuStyle}">
+                    <MenuItem.Icon>
+                        <Image Source="Data/info.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <ToolBarTray Grid.Row="1" Style="{DynamicResource ToolBarStyle}">
+            <ToolBar Margin="5" Padding="5" Style="{DynamicResource ToolBarStyle}">
+                <ComboBox ItemsSource="{StaticResource fontfamilies}" Margin="5" Padding="5" SelectedIndex="0" Width="200" SelectionChanged="ComboBox_SelectionChanged" Style="{DynamicResource ComboBoxStyle}"/>
+                <ComboBox ItemsSource="{StaticResource fontsizes}" Margin="5" Padding="5" SelectedIndex="2" Width="50" SelectionChanged="ComboBox_SelectionChanged_1" Style="{DynamicResource ComboBoxStyle}"/>
+            </ToolBar>
+            <ToolBar Margin="5" Padding="5" Style="{DynamicResource ToolBarStyle}">
+                <Button Click="Button_Click" Style="{DynamicResource ButtonStyle}">
+                    <Image Source="Data/text_bold.png"/>
+                </Button>
+                <Separator/>
+                <Button Click="Button_Click_1" Style="{DynamicResource ButtonStyle}">
+                    <Image Source="Data/text_italic.png"/>
+                </Button>
+                <Separator/>
+                <Button Click="Button_Click_2" Style="{DynamicResource ButtonStyle}">
+                    <Image Source="Data/text_under.png"/>
+                </Button>
+            </ToolBar>
+            <ToolBar Margin="5" Padding="5" Style="{DynamicResource ToolBarStyle}">
+                <StackPanel VerticalAlignment="Center">
+                    <RadioButton Content="Черный" IsChecked="True" Checked="RadioButton_Checked" Style="{DynamicResource RadioButtonStyle}"/>
+                    <RadioButton Content="Красный" Checked="RadioButton_Checked_1"  Foreground="Red" Style="{DynamicResource RadioButtonStyle}"/>
+                    <RadioButton Content="Зелёный" Checked="RadioButton_Checked_2" Foreground="Green" Style="{DynamicResource RadioButtonStyle}"/>
+                </StackPanel>
+            </ToolBar>
+            <ToolBar Margin="5" Padding="5" Style="{DynamicResource ToolBarStyle}">
+                <ComboBox x:Name="styleBox" VerticalAlignment="Top" Style="{DynamicResource ComboBoxStyle}"/>
+            </ToolBar>
+        </ToolBarTray>
+        <TextBox x:Name="textBox" Grid.Row="2" Margin="5" Padding="5" FontSize="16" FontFamily="Arial" TextWrapping="Wrap" TextDecorations="{x:Null}" Style="{DynamicResource TextBoxStyle}"/>
+    </Grid>
+</Window>
